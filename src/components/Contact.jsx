@@ -16,6 +16,7 @@ export default function Contact() {
     email: "",
     phone: "",
     message: "",
+    subject: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -51,8 +52,7 @@ export default function Contact() {
             from_phone: formData.phone,
             message: formData.message,
             to_email: SOCIAL_LINKS.email,
-          },
-          EMAILJS_USER_ID
+          }
         );
         setSubmitted(true);
       }

@@ -139,6 +139,12 @@ export default function RealEstate() {
             owner_name: formData.ownerName,
             property_type: PROPERTY_TYPES.find(t => t.value === formData.propertyType)?.label || formData.propertyType,
             location: formData.location,
+            area: formData.area || "No especificado",
+            rooms: formData.rooms || "No especificado",
+            bathrooms: formData.bathrooms || "No especificado",
+            description: formData.description || "Sin descripción adicional",
+            owner_phone: formData.ownerPhone,
+            owner_email: formData.ownerEmail,
           }
         );
 
