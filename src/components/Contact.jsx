@@ -2,12 +2,12 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhoneAlt, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp, faFacebook, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { PHONE_LINK, PHONE_FORMATTED, WHATSAPP_URL, SOCIAL_LINKS, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_USER_ID } from "../data/constants";
+import { PHONE_LINK, PHONE_FORMATTED, WHATSAPP_URL, SOCIAL_LINKS, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } from "../data/constants";
 import emailjs from "@emailjs/browser";
 
 // Inicializar EmailJS
 if (EMAILJS_SERVICE_ID !== "service_xxxxxxxxxxxx") {
-  emailjs.init(EMAILJS_USER_ID);
+  emailjs.init(EMAILJS_PUBLIC_KEY);
 }
 
 export default function Contact() {

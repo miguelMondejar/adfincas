@@ -4,7 +4,7 @@ import { HERO_TITLE, HERO_SUBTITLE, HERO_CTA, SECTIONS } from "../data/constants
 
 export default function Hero() {
   const handleScrollToContacto = () => {
-    document.querySelector(`#${SECTIONS.contact}`)?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(`#${SECTIONS.realEstate}`)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

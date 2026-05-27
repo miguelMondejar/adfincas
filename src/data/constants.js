@@ -30,10 +30,11 @@ export const HERO_TITLE = "Administración de Fincas Profesional";
 export const HERO_SUBTITLE = "Confianza, experiencia y dedicación en tus propiedades";
 export const HERO_CTA = "Solicitar Presupuesto";
 
-// EmailJS Configuration (placeholder - user should configure)
-export const EMAILJS_SERVICE_ID = "service_xxxxxxxxxxxx";
-export const EMAILJS_TEMPLATE_ID = "template_xxxxxxxxxxxx";
-export const EMAILJS_USER_ID = "user_xxxxxxxxxxxx";
+// EmailJS Configuration
+export const EMAILJS_SERVICE_ID = "service_4lgftcp";
+export const EMAILJS_TEMPLATE_ID = "template_616c5ya";
+export const EMAILJS_CONFIRMATION_TEMPLATE_ID = "template_4eps4mi";
+export const EMAILJS_PUBLIC_KEY = "5RWWrPAvzt9bMrZEy";
 
 // Section IDs
 export const SECTIONS = {
