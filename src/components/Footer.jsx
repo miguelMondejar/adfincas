@@ -55,7 +55,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 transition"
-                aria-label="adfincas en Facebook"
+                aria-label="ADFincas en Facebook"
               >
                 <FontAwesomeIcon icon={faFacebook} />
               </a>
@@ -64,7 +64,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-pink-500 hover:text-pink-700 transition"
-                aria-label="adfincas en Instagram"
+                aria-label="ADFincas en Instagram"
               >
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
@@ -73,7 +73,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-700 hover:text-blue-900 transition"
-                aria-label="adfincas en LinkedIn"
+                aria-label="ADFincas en LinkedIn"
               >
                 <FontAwesomeIcon icon={faLinkedin} />
               </a>

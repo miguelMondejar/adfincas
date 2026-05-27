@@ -1,8 +1,8 @@
-# adfincas - Administración de Fincas & Servicios Inmobiliarios
+# ADFincas - Administración de Fincas & Servicios Inmobiliarios
 
 ## 📋 Descripción
 
-adfincas es un sitio web profesional para una empresa de administración de fincas y servicios inmobiliarios. Desarrollado con React y Vite, ofrece una experiencia moderna y responsive con todas las secciones necesarias para presentar servicios de administración de propiedades.
+ADFincas es un sitio web profesional para una empresa de administración de fincas y servicios inmobiliarios. Desarrollado con React y Vite, ofrece una experiencia moderna y responsive con todas las secciones necesarias para presentar servicios de administración de propiedades.
 
 ## ✨ Características
 
@@ -43,7 +43,7 @@ adfincas es un sitio web profesional para una empresa de administración de finc
 ## 📁 Estructura del Proyecto
 
 ```
-adfincas/
+ADFincas/
 ├── src/
 │   ├── components/
 │   │   ├── Navbar.jsx          # Navegación principal
@@ -81,7 +81,7 @@ adfincas/
 
 ```bash
 # Navegar al directorio del proyecto
-cd adfincas
+cd ADFincas
 
 # Instalar dependencias
 npm install
@@ -140,7 +140,7 @@ El proyecto está optimizado para todos los tamaños de pantalla:
 
 ## 📄 Información Legal
 
-- **Empresa**: adfincas
+- **Empresa**: ADFincas
 - **Ubicación**: España
 - **Email**: info@grupoadfincas.es (actualizar)
 - **Teléfono**: +34 610 61 27 10 (actualizar)
@@ -163,4 +163,4 @@ Para reportar problemas o sugerencias, por favor contacta a través de:
 
 ## 📄 Licencia
 
-© 2026 adfincas. Todos los derechos reservados.
+© 2026 ADFincas. Todos los derechos reservados.

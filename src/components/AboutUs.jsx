@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBuildingColumns, faUsers, faAward, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faUsers, faAward, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import img from "../assets/towfiqu-barbhuiya-05XcCfTOzN4-unsplash.jpg";
 
 export default function AboutUs() {
   const stats = [
-    { icon: faAward, value: "15+", label: "Años de experiencia" },
-    { icon: faUsers, value: "500+", label: "Propiedades gestionadas" },
-    { icon: faChartLine, value: "98%", label: "Satisfacción de clientes" },
-    { icon: faBuildingColumns, value: "50+", label: "Equipos profesionales" },
+    { icon: faAward, value: "5+", label: "Años de experiencia" },
+    { icon: faUsers, value: "100+", label: "Propiedades gestionadas" },
+    { icon: faChartLine, value: "98%", label: "Satisfacción de clientes" }
   ];
 
   return (
@@ -18,7 +18,7 @@ export default function AboutUs() {
             Quiénes Somos
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            En adfincas, somos especialistas en administración de fincas y servicios inmobiliarios con más de una década de experiencia
+            En ADFincas, somos especialistas en administración de fincas y servicios inmobiliarios con más de una década de experiencia
           </p>
         </div>
 
@@ -65,14 +65,11 @@ export default function AboutUs() {
 
           {/* Right Column - Image Placeholder */}
           <div className="bg-gradient-to-br from-[#5AAD94] to-[#A47C48] rounded-lg overflow-hidden shadow-lg h-96 flex items-center justify-center">
-            <div className="text-center">
-              <FontAwesomeIcon
-                icon={faBuildingColumns}
-                className="text-white text-6xl mb-4"
-              />
-              <p className="text-white text-lg font-semibold">Imagen del equipo</p>
-              <p className="text-white text-sm mt-2">Próximamente</p>
-            </div>
+            <img 
+              src={img} 
+              alt="Equipo de ADFincas" 
+              className="rounded-lg overflow-hidden shadow-lg w-full h-auto" 
+            />
           </div>
         </div>
 
@@ -81,7 +78,7 @@ export default function AboutUs() {
           <h3 className="text-2xl font-bold text-center text-[#1A1A1A] mb-12">
             Nuestros Números
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-[#5AAD94] rounded-full mb-4">

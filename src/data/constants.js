@@ -6,14 +6,14 @@ export const PHONE_LINK = "tel:+610612710";
 export const EMAIL = "info@grupoadfincas.es";
 
 // Company Information
-export const COMPANY_NAME = "adfincas";
-export const COMPANY_FULL_NAME = "adfincas - Administración de Fincas & Servicios Inmobiliarios";
+export const COMPANY_NAME = "ADFincas";
+export const COMPANY_FULL_NAME = "ADFincas - Administración de Fincas & Servicios Inmobiliarios";
 
 // Social Links
 export const SOCIAL_LINKS = {
-  facebook: "https://www.facebook.com/adfincas",
-  instagram: "https://www.instagram.com/adfincas",
-  linkedin: "https://www.linkedin.com/company/adfincas",
+  facebook: "https://www.facebook.com/ADFincas",
+  instagram: "https://www.instagram.com/ADFincas",
+  linkedin: "https://www.linkedin.com/company/ADFincas",
   email: EMAIL,
 };
 

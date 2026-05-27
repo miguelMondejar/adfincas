@@ -89,7 +89,7 @@ export default function Navbar() {
             className={`flex items-center gap-3 font-bold text-2xl transition-all duration-300 hover:scale-105 ${
               scrolled ? "text-[#5AAD94]" : "text-white"
             }`}
-            aria-label="adfincas - Inicio"
+            aria-label="ADFincas - Inicio"
           >
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 shadow-sm ${
@@ -98,7 +98,7 @@ export default function Navbar() {
             >
               AD
             </div>
-            <span className="hidden sm:inline tracking-tight">adfincas</span>
+            <span className="hidden sm:inline tracking-tight">ADFincas</span>
           </a>
 
           {/* Desktop Menu */}
