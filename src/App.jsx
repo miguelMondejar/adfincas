@@ -13,9 +13,26 @@ import LegalInfo from "./pages/LegalInfo";
 import Hero from "./components/Hero";
 import SEO from "./components/SEO";
 import { SEO_DATA, ORGANIZATION_SCHEMA, LOCAL_BUSINESS_SCHEMA, SERVICES_SCHEMA } from "./utils/seoConfig";
+import { COLORS } from "./utils/colorConfig";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
+
+  // Inject CSS variables from colorConfig for dynamic color changes
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty('--color-primary', COLORS.primary);
+    root.style.setProperty('--color-secondary', COLORS.secondary);
+    root.style.setProperty('--color-secondary-dark', COLORS.secondaryDark);
+    root.style.setProperty('--color-dark', COLORS.dark);
+    root.style.setProperty('--color-white', COLORS.white);
+    root.style.setProperty('--color-whatsapp', COLORS.whatsapp);
+    root.style.setProperty('--color-gray-100', COLORS.gray100);
+    root.style.setProperty('--color-gray-300', COLORS.gray300);
+    root.style.setProperty('--color-gray-500', COLORS.gray500);
+    root.style.setProperty('--color-gray-600', COLORS.gray600);
+    root.style.setProperty('--color-gray-700', COLORS.gray700);
+  }, []);
 
   useEffect(() => {
     // Check URL to determine current page

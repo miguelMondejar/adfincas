@@ -166,7 +166,7 @@ export default function CookieConsent() {
     return (
       <button
         onClick={() => setShowSettings(true)}
-        className="fixed bottom-8 right-8 z-40 bg-[#5AAD94] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#A47C48] transition flex items-center gap-2 shadow-lg"
+        className="fixed bottom-8 right-8 z-40 bg-[--color-primary] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[--color-secondary] transition flex items-center gap-2 shadow-lg"
         title="Abrir preferencias de cookies"
       >
         <FontAwesomeIcon icon={faCookie} className="text-lg" />
@@ -185,7 +185,7 @@ export default function CookieConsent() {
               <div className="flex items-start gap-4">
                 <FontAwesomeIcon
                   icon={faCookie}
-                  className="text-3xl text-[#5AAD94] mt-1"
+                  className="text-3xl text-[--color-primary] mt-1"
                 />
 
                 <div>
@@ -198,7 +198,7 @@ export default function CookieConsent() {
                     estadísticas y contenido personalizado. Consulta nuestra{" "}
                     <a
                       href="/politica-cookies"
-                      className="text-[#5AAD94] hover:underline"
+                      className="text-[--color-primary] hover:underline"
                     >
                       política de cookies
                     </a>
@@ -212,7 +212,7 @@ export default function CookieConsent() {
             <div className="flex flex-col gap-2 md:col-span-2">
               <button
                 onClick={handleAcceptAll}
-                className="bg-[#5AAD94] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#A47C48] transition w-full"
+                className="bg-[--color-primary] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[--color-secondary] transition w-full"
               >
                 Aceptar todo
               </button>
@@ -315,7 +315,7 @@ export default function CookieConsent() {
             <div className="flex flex-col gap-2 md:col-span-2">
               <button
                 onClick={handleSavePreferences}
-                className="bg-[#5AAD94] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#A47C48] transition w-full"
+                className="bg-[--color-primary] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[--color-secondary] transition w-full"
               >
                 Guardar Preferencias
               </button>

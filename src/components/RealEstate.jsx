@@ -186,6 +186,7 @@ export default function RealEstate() {
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-4">
             Servicios Inmobiliarios
           </h2>
+          <div className="w-24 h-1 bg-[--color-secondary] mx-auto mb-6 rounded-full"></div>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Expertos en compra, venta y gestión de propiedades inmobiliarias
           </p>
@@ -196,9 +197,9 @@ export default function RealEstate() {
           {REAL_ESTATE_SERVICES.map((service, index) => (
             <div
               key={index}
-              className="p-8 bg-gray-50 rounded-lg hover:shadow-lg transition border-l-4 border-[#5AAD94]"
+              className="p-8 bg-gray-50 rounded-lg hover:shadow-lg transition border-l-4 border-[--color-primary]"
             >
-              <div className="w-12 h-12 bg-[#5AAD94] rounded-full flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-[--color-primary] rounded-full flex items-center justify-center mb-4">
                 <FontAwesomeIcon icon={service.icon} className="text-xl text-white" />
               </div>
               <h3 className="text-xl font-bold text-[#1A1A1A] mb-3">{service.title}</h3>
@@ -206,7 +207,7 @@ export default function RealEstate() {
               <ul className="text-gray-600 text-sm space-y-2">
                 {service.details.map((detail, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="text-[#A47C48] mr-2">•</span>
+                    <span className="text-[--color-secondary] mr-2">•</span>
                     <span>{detail}</span>
                   </li>
                 ))}
@@ -216,7 +217,7 @@ export default function RealEstate() {
         </div>
 
         {/* Form Section */}
-        <div className="bg-gradient-to-r from-[#5AAD94] to-[#A47C48] rounded-lg p-8 md:p-12 text-white shadow-xl">
+        <div className="bg-gradient-to-r from-[--color-primary] to-[--color-secondary] rounded-lg p-8 md:p-12 text-white shadow-xl">
           <div className="mb-8">
             <h3 className="text-3xl font-bold mb-2 text-center">¿Tienes un inmueble?</h3>
             <p className="text-center text-lg opacity-95">
@@ -373,7 +374,7 @@ export default function RealEstate() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 bg-gradient-to-r from-white to-yellow-50 text-[#5AAD94] px-8 py-4 rounded-lg font-bold text-lg hover:shadow-2xl transition disabled:opacity-60 disabled:cursor-not-allowed shadow-xl hover:scale-105 duration-300 flex items-center justify-center gap-2"
+                  className="flex-1 bg-gradient-to-r from-white to-yellow-50 text-[--color-primary] px-8 py-4 rounded-lg font-bold text-lg hover:shadow-2xl transition disabled:opacity-60 disabled:cursor-not-allowed shadow-xl hover:scale-105 duration-300 flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <>

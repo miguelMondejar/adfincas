@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
         <h3 className="text-xl font-bold text-[#1A1A1A]">{title}</h3>
         <FontAwesomeIcon
           icon={expandedSections[id] ? faChevronUp : faChevronDown}
-          className="text-[#5AAD94]"
+          className="text-[--color-primary]"
         />
       </button>
       {expandedSections[id] && (
@@ -59,25 +59,25 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* Quick Reference Table */}
-        <div className="bg-gradient-to-r from-[#5AAD94]/10 to-[#A47C48]/10 rounded-lg p-6 mb-8">
+        <div className="bg-gradient-to-r from-[--color-primary]/10 to-[--color-secondary]/10 rounded-lg p-6 mb-8">
           <h2 className="font-bold text-lg mb-4 text-[#1A1A1A]">
             Resumen Rápido
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
-              <strong className="text-[#5AAD94]">Responsable:</strong>
+              <strong className="text-[--color-primary]">Responsable:</strong>
               <p className="text-gray-700">{COMPANY_NAME}</p>
             </div>
             <div>
-              <strong className="text-[#5AAD94]">Base Legal:</strong>
+              <strong className="text-[--color-primary]">Base Legal:</strong>
               <p className="text-gray-700">Consentimiento, RGPD</p>
             </div>
             <div>
-              <strong className="text-[#5AAD94]">Datos Recogidos:</strong>
+              <strong className="text-[--color-primary]">Datos Recogidos:</strong>
               <p className="text-gray-700">Nombre, email, teléfono</p>
             </div>
             <div>
-              <strong className="text-[#5AAD94]">Derechos:</strong>
+              <strong className="text-[--color-primary]">Derechos:</strong>
               <p className="text-gray-700">Acceso, rectificación, eliminación</p>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function PrivacyPolicy() {
               <p>Recogemos datos en las siguientes situaciones:</p>
 
               <div>
-                <strong className="text-[#5AAD94] text-lg">
+                <strong className="text-[--color-primary] text-lg">
                   Formularios de Contacto
                 </strong>
                 <ul className="list-disc list-inside mt-2 ml-4">
@@ -152,7 +152,7 @@ export default function PrivacyPolicy() {
               </div>
 
               <div>
-                <strong className="text-[#5AAD94] text-lg">
+                <strong className="text-[--color-primary] text-lg">
                   Formulario Inmobiliario
                 </strong>
                 <ul className="list-disc list-inside mt-2 ml-4">
@@ -164,7 +164,7 @@ export default function PrivacyPolicy() {
               </div>
 
               <div>
-                <strong className="text-[#5AAD94] text-lg">
+                <strong className="text-[--color-primary] text-lg">
                   Datos Automáticos (Analytics)
                 </strong>
                 <ul className="list-disc list-inside mt-2 ml-4">
@@ -186,28 +186,28 @@ export default function PrivacyPolicy() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="border-l-4 border-[#5AAD94] pl-4">
-                  <h4 className="font-bold text-[#5AAD94]">Derecho de Acceso</h4>
+                <div className="border-l-4 border-[--color-primary] pl-4">
+                  <h4 className="font-bold text-[--color-primary]">Derecho de Acceso</h4>
                   <p className="text-sm">
                     Solicitar qué datos tenemos sobre ti
                   </p>
                 </div>
-                <div className="border-l-4 border-[#5AAD94] pl-4">
-                  <h4 className="font-bold text-[#5AAD94]">
+                <div className="border-l-4 border-[--color-primary] pl-4">
+                  <h4 className="font-bold text-[--color-primary]">
                     Derecho de Rectificación
                   </h4>
                   <p className="text-sm">
                     Corregir datos incorrectos o incompletos
                   </p>
                 </div>
-                <div className="border-l-4 border-[#5AAD94] pl-4">
-                  <h4 className="font-bold text-[#5AAD94]">Derecho al Olvido</h4>
+                <div className="border-l-4 border-[--color-primary] pl-4">
+                  <h4 className="font-bold text-[--color-primary]">Derecho al Olvido</h4>
                   <p className="text-sm">
                     Solicitar eliminación de tus datos
                   </p>
                 </div>
-                <div className="border-l-4 border-[#5AAD94] pl-4">
-                  <h4 className="font-bold text-[#5AAD94]">
+                <div className="border-l-4 border-[--color-primary] pl-4">
+                  <h4 className="font-bold text-[--color-primary]">
                     Derecho de Portabilidad
                   </h4>
                   <p className="text-sm">Recibir tus datos en formato portable</p>
@@ -227,7 +227,7 @@ export default function PrivacyPolicy() {
               <p>Utilizamos cookies con los siguientes propósitos:</p>
 
               <div>
-                <strong className="text-[#5AAD94]">Cookies Técnicas</strong>
+                <strong className="text-[--color-primary]">Cookies Técnicas</strong>
                 <p className="text-sm mt-1">
                   Esenciales para que el sitio funcione (sesión, preferencias).
                   No necesitan consentimiento.
@@ -235,7 +235,7 @@ export default function PrivacyPolicy() {
               </div>
 
               <div>
-                <strong className="text-[#5AAD94]">Cookies de Analytics</strong>
+                <strong className="text-[--color-primary]">Cookies de Analytics</strong>
                 <p className="text-sm mt-1">
                   Google Analytics para entender comportamiento de usuarios.
                   Requieren consentimiento.
@@ -243,7 +243,7 @@ export default function PrivacyPolicy() {
               </div>
 
               <div>
-                <strong className="text-[#5AAD94]">Cookies de Marketing</strong>
+                <strong className="text-[--color-primary]">Cookies de Marketing</strong>
                 <p className="text-sm mt-1">
                   Para personalizar contenido y anuncios. Requieren
                   consentimiento.
@@ -316,7 +316,7 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* Footer Note */}
-        <div className="mt-12 p-6 bg-gradient-to-r from-[#5AAD94]/5 to-[#A47C48]/5 rounded-lg text-center">
+        <div className="mt-12 p-6 bg-gradient-to-r from-[--color-primary]/5 to-[--color-secondary]/5 rounded-lg text-center">
           <p className="text-sm text-gray-600">
             Esta política de privacidad está realizada en cumplimento del
             Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica

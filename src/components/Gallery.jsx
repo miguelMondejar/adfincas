@@ -85,8 +85,8 @@ export default function Gallery() {
                 onClick={() => goToSlide(index)}
                 className={`group relative h-48 rounded-xl overflow-hidden transition-all duration-300 border-2 ${
                   index === currentIndex
-                    ? "border-[#5AAD94] shadow-lg"
-                    : "border-transparent hover:border-[#A47C48]"
+                    ? "border-[--color-primary] shadow-lg"
+                    : "border-transparent hover:border-[--color-secondary]"
                 }`}
                 loading="lazy"
               >
@@ -119,7 +119,7 @@ export default function Gallery() {
       </div>
 
       {/* Main Gallery Hero */}
-      <div className="relative h-screen md:h-[80vh] bg-gradient-to-br from-[#5AAD94] to-[#A47C48] overflow-hidden flex items-center justify-center">
+      <div className="relative h-screen md:h-[80vh] bg-gradient-to-br from-[--color-primary] to-[--color-secondary] overflow-hidden flex items-center justify-center">
         {/* Background Image */}
         <div 
           className="absolute inset-0 opacity-40"
@@ -151,7 +151,7 @@ export default function Gallery() {
           <div className="flex justify-center gap-4">
             <button
               onClick={goToPrevious}
-              className="bg-white text-[#5AAD94] p-4 rounded-full hover:bg-gray-100 transition shadow-lg hover:shadow-xl"
+              className="bg-white text-[--color-primary] p-4 rounded-full hover:bg-gray-100 transition shadow-lg hover:shadow-xl"
               aria-label="Anterior"
             >
               <FontAwesomeIcon icon={faChevronLeft} size="lg" />
@@ -159,7 +159,7 @@ export default function Gallery() {
 
             <button
               onClick={goToNext}
-              className="bg-white text-[#5AAD94] p-4 rounded-full hover:bg-gray-100 transition shadow-lg hover:shadow-xl"
+              className="bg-white text-[--color-primary] p-4 rounded-full hover:bg-gray-100 transition shadow-lg hover:shadow-xl"
               aria-label="Siguiente"
             >
               <FontAwesomeIcon icon={faChevronRight} size="lg" />
@@ -178,7 +178,7 @@ export default function Gallery() {
                 onClick={() => goToSlide(index)}
                 className={`transition-all duration-300 ${
                   index === currentIndex
-                    ? "bg-[#5AAD94] w-12 h-3"
+                    ? "bg-[--color-primary] w-12 h-3"
                     : "bg-gray-300 w-3 h-3 hover:bg-gray-400"
                 } rounded-full`}
                 aria-label={`Ir a galeria ${index + 1}`}

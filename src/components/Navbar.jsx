@@ -76,7 +76,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
           ? "bg-white shadow-lg py-1"
-          : "bg-gradient-to-r from-[#5AAD94] to-[#A47C48] shadow-md py-2"
+          : "bg-gradient-to-r from-[--color-primary] to-[--color-secondary] shadow-md py-2"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,18 +87,11 @@ export default function Navbar() {
             href="#inicio"
             onClick={scrollToTop}
             className={`flex items-center gap-3 font-bold text-2xl transition-all duration-300 hover:scale-105 ${
-              scrolled ? "text-[#5AAD94]" : "text-white"
+              scrolled ? "text-[--color-primary]" : "text-white"
             }`}
             aria-label="ADFincas - Inicio"
           >
-            <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 shadow-sm ${
-                scrolled ? "bg-[#5AAD94] text-white" : "bg-white text-[#5AAD94]"
-              }`}
-            >
-              AD
-            </div>
-            <span className="hidden sm:inline tracking-tight">ADFincas</span>
+            <span className="hidden sm:inline tracking-tight">Grupo ADFincas</span>
           </a>
 
           {/* Desktop Menu */}
@@ -112,14 +105,14 @@ export default function Navbar() {
                   onClick={(e) => handleMenuItemClick(e, item.href)}
                   className={`text-sm font-semibold transition-all duration-300 relative group py-2 ${
                     scrolled 
-                      ? (isActive ? "text-[#5AAD94]" : "text-gray-600 hover:text-[#5AAD94]") 
+                      ? (isActive ? "text-[--color-primary]" : "text-gray-600 hover:text-[--color-primary]") 
                       : (isActive ? "text-white" : "text-gray-200 hover:text-white")
                   }`}
                 >
                   {item.label}
                   <span
                     className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 rounded-full ${
-                      scrolled ? "bg-[#5AAD94]" : "bg-white"
+                      scrolled ? "bg-[--color-primary]" : "bg-white"
                     } ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
                   ></span>
                 </a>
@@ -162,8 +155,8 @@ export default function Navbar() {
               href={PHONE_LINK}
               className={`flex items-center px-5 py-2.5 rounded-full font-bold transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md ${
                 scrolled
-                  ? "bg-[#5AAD94] text-white hover:bg-[#438a74]"
-                  : "bg-white text-[#5AAD94] hover:bg-gray-50"
+                  ? "bg-[--color-primary] text-white hover:bg-[#438a74]"
+                  : "bg-white text-[--color-primary] hover:bg-gray-50"
               }`}
             >
               <FontAwesomeIcon icon={faPhone} className="mr-2" />
@@ -226,7 +219,7 @@ export default function Navbar() {
                     onClick={(e) => handleMenuItemClick(e, item.href)}
                     className={`px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${
                       scrolled
-                        ? isActive ? "bg-[#5AAD94]/10 text-[#5AAD94]" : "text-gray-700 hover:bg-gray-50"
+                        ? isActive ? "bg-[--color-primary]/10 text-[--color-primary]" : "text-gray-700 hover:bg-gray-50"
                         : isActive ? "bg-white/20 text-white" : "text-white/90 hover:bg-white/10"
                     }`}
                   >
@@ -249,7 +242,7 @@ export default function Navbar() {
                 <a
                   href={PHONE_LINK}
                   className={`flex justify-center items-center gap-2 py-3 rounded-xl font-bold transition-all shadow-sm ${
-                    scrolled ? "bg-[#5AAD94] text-white" : "bg-white text-[#5AAD94]"
+                    scrolled ? "bg-[--color-primary] text-white" : "bg-white text-[--color-primary]"
                   }`}
                 >
                   <FontAwesomeIcon icon={faPhone} /> Llamar

@@ -40,15 +40,14 @@ export default function FloatingWhatsApp() {
     <>
       {/* Chat Bubble */}
       {isOpen && (
-        <div className="fixed bottom-24 left-6 md:left-8 bg-white rounded-2xl shadow-2xl p-6 w-80 md:w-96 z-40 animate-slideUp border-2 border-[#5AAD94]">
+        <div className="fixed bottom-24 left-6 md:left-8 bg-white rounded-2xl shadow-2xl p-6 w-80 md:w-96 z-40 animate-slideUp border-2 border-[--color-primary]">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#5AAD94] to-[#A47C48] rounded-full flex items-center justify-center text-white">
+              <div className="w-12 h-12 bg-gradient-to-br from-[--color-primary] to-[--color-secondary] rounded-full flex items-center justify-center text-white">
                 <FontAwesomeIcon icon={faWhatsapp} className="text-xl" />
               </div>
               <div>
                 <h3 className="font-bold text-gray-800">ADFincas</h3>
-                <p className="text-xs text-green-600 font-semibold">Actualmente en línea</p>
               </div>
             </div>
             <button
@@ -66,13 +65,13 @@ export default function FloatingWhatsApp() {
               Contáctanos por WhatsApp para consultas sobre administración de fincas, mantenimiento técnico y asesoramiento legal.
             </p>
             <p className="text-xs text-gray-500 mb-3">
-              Responder tiempo: Generalmente dentro de 1 hora (horas de oficina)
+              Responder tiempo: Generalmente dentro de 1 hora
             </p>
           </div>
 
           <button
             onClick={handleWhatsAppClick}
-            className="w-full bg-gradient-to-r from-[#5AAD94] to-[#25d366] text-white py-3 rounded-lg font-bold hover:shadow-lg transition flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-[--color-primary] to-[#25d366] text-white py-3 rounded-lg font-bold hover:shadow-lg transition flex items-center justify-center gap-2"
           >
             <FontAwesomeIcon icon={faWhatsapp} className="text-lg" />
             Chatear ahora
@@ -101,14 +100,14 @@ export default function FloatingWhatsApp() {
         <div className="absolute inset-0 bg-[#25d366] rounded-full animate-ping opacity-20" />
 
         {/* Main Button */}
-        <div className="relative w-16 h-16 bg-gradient-to-br from-[#5AAD94] to-[#25d366] rounded-full flex items-center justify-center shadow-2xl hover:shadow-3xl hover:scale-110 cursor-pointer text-white text-3xl border-4 border-white">
+        <div className="relative w-16 h-16 bg-gradient-to-br from-[--color-primary] to-[#25d366] rounded-full flex items-center justify-center shadow-2xl hover:shadow-3xl hover:scale-110 cursor-pointer text-white text-3xl border-4 border-white">
           <FontAwesomeIcon icon={faWhatsapp} />
         </div>
 
         {/* Label */}
-        <div className="absolute -top-12 left-0 bg-white rounded-lg px-3 py-2 shadow-lg whitespace-nowrap text-xs font-bold text-gray-800 border-2 border-[#5AAD94] hidden md:block">
+        <div className="absolute -top-12 left-0 bg-white rounded-lg px-3 py-2 shadow-lg whitespace-nowrap text-xs font-bold text-gray-800 border-2 border-[--color-primary] hidden md:block">
           ¡Chatea con nosotros!
-          <div className="absolute top-full left-2 w-2 h-2 bg-white border-r-2 border-b-2 border-[#5AAD94] transform rotate-45" />
+          <div className="absolute top-full left-2 w-2 h-2 bg-white border-r-2 border-b-2 border-[--color-primary] transform rotate-45" />
         </div>
       </button>
 

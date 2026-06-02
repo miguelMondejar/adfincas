@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+
+// Import corporate colors from the single source of truth
+const { COLORS } = require('./src/utils/colorConfig.js');
+
 module.exports = {
   content: [
     "./index.html",
@@ -7,9 +11,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#5AAD94',    // Verde profesional
-        secondary: '#A47C48',  // Madera
-        accent: '#FFFFFF',     // Blanco (fondo/contraste)
+        primary: COLORS.primary,
+        secondary: COLORS.secondary,
+        'secondary-dark': COLORS.secondaryDark,
+        dark: COLORS.dark,
+        white: COLORS.white,
+        whatsapp: COLORS.whatsapp,
       },
     },
   },

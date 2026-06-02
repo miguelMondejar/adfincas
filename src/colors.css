@@ -1,0 +1,14 @@
+/* Corporate Colors - CSS Variables */
+:root {
+  --color-primary: #091f4d;
+  --color-secondary: #6d91ba;
+  --color-secondary-dark: #a4a39f;
+  --color-dark: #1A1A1A;
+  --color-white: #FFFFFF;
+  --color-whatsapp: #25d366;
+  --color-gray-100: #F3F4F6;
+  --color-gray-300: #D1D5DB;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+}

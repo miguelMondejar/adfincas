@@ -1,8 +1,8 @@
 {
-  "name": "ADFincas",
+  "name": "adfincas",
   "private": true,
   "version": "1.0.0",
-  "description": "ADFincas - Administración de Fincas & Servicios Inmobiliarios",
+  "description": "Grupo ADFincas - Administración de Fincas & Servicios Inmobiliarios",
   "type": "module",
   "scripts": {
     "dev": "vite",
