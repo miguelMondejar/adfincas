@@ -5,6 +5,7 @@ import Gallery from "./components/Gallery";
 import AboutUs from "./components/AboutUs";
 import Services from "./components/Services";
 import RealEstate from "./components/RealEstate";
+import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CookieConsent from "./components/CookieConsent";
@@ -14,6 +15,7 @@ import Hero from "./components/Hero";
 import SEO from "./components/SEO";
 import { SEO_DATA, ORGANIZATION_SCHEMA, LOCAL_BUSINESS_SCHEMA, SERVICES_SCHEMA } from "./utils/seoConfig";
 import { COLORS } from "./utils/colorConfig";
+import { loadRecaptchaScript } from "./utils/formSecurityConfig";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -32,6 +34,11 @@ function App() {
     root.style.setProperty('--color-gray-500', COLORS.gray500);
     root.style.setProperty('--color-gray-600', COLORS.gray600);
     root.style.setProperty('--color-gray-700', COLORS.gray700);
+  }, []);
+
+  // Load reCAPTCHA v3 script
+  useEffect(() => {
+    loadRecaptchaScript();
   }, []);
 
   useEffect(() => {
@@ -84,6 +91,7 @@ function App() {
             <AboutUs />
             <Services />
             <RealEstate />
+            <FAQ />
             <Contact />
           </>
         ) : (

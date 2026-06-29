@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhoneAlt, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faPhoneAlt, faPaperPlane, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp, faFacebook, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { PHONE_LINK, PHONE_FORMATTED, WHATSAPP_URL, SOCIAL_LINKS, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } from "../data/constants";
+import { PHONE_LINK, PHONE_FORMATTED, WHATSAPP_URL, SOCIAL_LINKS, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, EMAILJS_CONFIRMATION_TEMPLATE_ID, EMAIL } from "../data/constants";
+import { validateContactForm, checkRateLimit, recordSubmission, isHoneypotFilled, sanitizeInput, executeRecaptcha } from "../utils/formSecurityConfig";
+import HoneypotField from "./HoneypotField";
 import emailjs from "@emailjs/browser";
+import { trackEvent } from "../utils/analyticsConfig";
 
 // Inicializar EmailJS
 if (EMAILJS_SERVICE_ID !== "service_xxxxxxxxxxxx") {
@@ -16,11 +19,13 @@ export default function Contact() {
     email: "",
     phone: "",
     message: "",
+    website: "", // Honeypot field
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,47 +33,110 @@ export default function Contact() {
       ...prev,
       [name]: value,
     }));
+    // Limpiar error del campo cuando el usuario empieza a escribir
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setErrors({});
 
     try {
+      // ==================== SECURITY CHECKS ====================
+      
+      // 1. Check honeypot - si está lleno, es un bot
+      if (isHoneypotFilled(formData.website)) {
+        trackEvent("spam_detected", { form: "contact_honeypot" });
+        // Mostrar mensaje de éxito falso para no revelar el honeypot
+        setSubmitted(true);
+        setTimeout(() => {
+          setFormData({ name: "", email: "", phone: "", message: "", website: "" });
+          setSubmitted(false);
+        }, 3000);
+        return;
+      }
+
+      // 2. Check rate limiting
+      const rateLimitCheck = checkRateLimit();
+      if (!rateLimitCheck.allowed) {
+        setError(rateLimitCheck.message);
+        setLoading(false);
+        trackEvent("rate_limit_exceeded", { form: "contact" });
+        return;
+      }
+
+      // 3. Validar formulario
+      const validationErrors = validateContactForm(formData);
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        setLoading(false);
+        return;
+      }
+
+      // 4. Execute reCAPTCHA v3
+      const recaptchaToken = await executeRecaptcha('contact_form_submit');
+      if (recaptchaToken) {
+        trackEvent("recaptcha_token_generated", { form: "contact", token: recaptchaToken.substring(0, 20) + "..." });
+      }
+
+      // ==================== SEND EMAIL ====================
       if (EMAILJS_SERVICE_ID === "service_xxxxxxxxxxxx") {
         // Modo demo
         console.log("Datos del contacto (modo demo):", formData);
         setSubmitted(true);
+        recordSubmission();
+        trackEvent("contact_form_submit", { mode: "demo" });
       } else {
+        // Sanitizar datos antes de enviar
+        const sanitizedData = {
+          from_name: sanitizeInput(formData.name),
+          from_email: sanitizeInput(formData.email),
+          from_phone: sanitizeInput(formData.phone),
+          message: sanitizeInput(formData.message),
+          to_email: EMAIL,
+        };
+
         // Enviar con EmailJS
         await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
-          {
-            from_name: formData.name,
-            from_email: formData.email,
-            from_phone: formData.phone,
-            message: formData.message,
-            to_email: SOCIAL_LINKS.email,
-          }
+          sanitizedData
         );
+
+        // Enviar confirmación al usuario si está configurado
+        if (EMAILJS_CONFIRMATION_TEMPLATE_ID !== "template_xxxxxxxxxxxx") {
+          await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_CONFIRMATION_TEMPLATE_ID,
+            {
+              to_email: formData.email,
+              from_name: sanitizeInput(formData.name),
+              message: sanitizeInput(formData.message),
+            }
+          );
+        }
+        
         setSubmitted(true);
+        recordSubmission(); // Registrar envío para rate limiting
+        trackEvent("contact_form_submit", { mode: "production" });
       }
 
       // Resetear formulario
       setTimeout(() => {
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-        });
+        setFormData({ name: "", email: "", phone: "", message: "", website: "" });
         setSubmitted(false);
       }, 3000);
     } catch (err) {
       console.error("Error al enviar contacto:", err);
       setError("Error al enviar el mensaje. Por favor, intenta de nuevo.");
+      trackEvent("contact_form_error", { error: err.message });
     } finally {
       setLoading(false);
     }
@@ -176,73 +244,128 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
                   <div className="bg-red-100 border-l-4 border-red-500 p-4 rounded">
-                    <p className="text-red-700 text-sm">{error}</p>
+                    <p className="text-red-700 text-sm flex items-center gap-2">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="text-xs" />
+                      {error}
+                    </p>
                   </div>
                 )}
 
+                {/* Honeypot field - invisible to users */}
+                <HoneypotField value={formData.website} onChange={handleInputChange} />
+
                 <div>
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
+                  <label htmlFor="name" className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
                     Nombre *
                   </label>
                   <input
+                    id="name"
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Tu nombre"
                     required
-                    className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-[--color-primary]"
+                    aria-describedby={errors.name ? "name-error" : undefined}
+                    className={`w-full px-4 py-2 rounded border-2 transition text-[#1A1A1A] focus:outline-none ${
+                      errors.name
+                        ? "border-red-400 bg-red-50 focus:border-red-500"
+                        : "border-gray-300 focus:border-[--color-primary]"
+                    }`}
                   />
+                  {errors.name && (
+                    <p id="name-error" className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="text-xs" />
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
+                  <label htmlFor="email" className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
                     Email *
                   </label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="tu@email.com"
                     required
-                    className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-[--color-primary]"
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    className={`w-full px-4 py-2 rounded border-2 transition text-[#1A1A1A] focus:outline-none ${
+                      errors.email
+                        ? "border-red-400 bg-red-50 focus:border-red-500"
+                        : "border-gray-300 focus:border-[--color-primary]"
+                    }`}
                   />
+                  {errors.email && (
+                    <p id="email-error" className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="text-xs" />
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
-                    Teléfono
+                  <label htmlFor="phone" className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
+                    Teléfono *
                   </label>
                   <input
+                    id="phone"
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="+34 6xx xxx xxx"
-                    className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-[--color-primary]"
+                    placeholder="+34 610 61 27 10"
+                    required
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
+                    className={`w-full px-4 py-2 rounded border-2 transition text-[#1A1A1A] focus:outline-none ${
+                      errors.phone
+                        ? "border-red-400 bg-red-50 focus:border-red-500"
+                        : "border-gray-300 focus:border-[--color-primary]"
+                    }`}
                   />
+                  {errors.phone && (
+                    <p id="phone-error" className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="text-xs" />
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
+                  <label htmlFor="message" className="block text-sm font-semibold text-[#1A1A1A] mb-2 text-left">
                     Mensaje *
                   </label>
                   <textarea
+                    id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Tu mensaje..."
-                    rows="5"
+                    placeholder="Cuéntanos tu consulta..."
+                    rows="4"
                     required
-                    className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-[--color-primary] resize-none"
-                  ></textarea>
+                    aria-describedby={errors.message ? "message-error" : undefined}
+                    className={`w-full px-4 py-2 rounded border-2 transition text-[#1A1A1A] focus:outline-none resize-none ${
+                      errors.message
+                        ? "border-red-400 bg-red-50 focus:border-red-500"
+                        : "border-gray-300 focus:border-[--color-primary]"
+                    }`}
+                  />
+                  {errors.message && (
+                    <p id="message-error" className="text-red-600 text-sm mt-1 flex items-center gap-1">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="text-xs" />
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[--color-primary] text-white px-6 py-2 rounded font-semibold hover:bg-[--color-secondary] transition disabled:opacity-50"
+                  className="w-full bg-[--color-primary] hover:bg-[--color-secondary] text-white font-bold py-3 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? "Enviando..." : "Enviar Mensaje"}
                 </button>

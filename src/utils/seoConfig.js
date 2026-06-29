@@ -51,9 +51,9 @@ export const ORGANIZATION_SCHEMA = {
   },
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Dirección de la empresa",
-    "addressLocality": "España",
-    "postalCode": "CP",
+    "streetAddress": "Calle Principal, 123",
+    "addressLocality": "Madrid",
+    "postalCode": "28001",
     "addressCountry": "ES",
   },
 };
@@ -79,6 +79,12 @@ export const LOCAL_BUSINESS_SCHEMA = {
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       "opens": "09:00",
       "closes": "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "10:00",
+      "closes": "13:00",
     },
   ],
 };

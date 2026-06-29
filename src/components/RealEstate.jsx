@@ -5,6 +5,8 @@ import { REAL_ESTATE_SERVICES } from "../data/realEstateServices";
 import emailjs from "@emailjs/browser";
 import { trackEvent } from "../utils/analyticsConfig";
 import { EMAIL, EMAILJS_SERVICE_ID, EMAILJS_CONFIRMATION_TEMPLATE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } from "../data/constants";
+import { validateRealEstateForm, checkRateLimit, recordSubmission, isHoneypotFilled, sanitizeInput, executeRecaptcha } from "../utils/formSecurityConfig";
+import HoneypotField from "./HoneypotField";
 
 // Inicializar EmailJS
 if (EMAILJS_SERVICE_ID !== "service_xxxxxxxxxxxx") {
@@ -20,17 +22,7 @@ const PROPERTY_TYPES = [
 ];
 
 const validateForm = (data) => {
-  const errors = {};
-  
-  if (!data.ownerName.trim()) errors.ownerName = "El nombre es requerido";
-  if (!data.ownerEmail.trim()) errors.ownerEmail = "El email es requerido";
-  if (data.ownerEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.ownerEmail)) {
-    errors.ownerEmail = "Ingresa un email válido";
-  }
-  if (!data.ownerPhone.trim()) errors.ownerPhone = "El teléfono es requerido";
-  if (!data.location.trim()) errors.location = "La ubicación es requerida";
-  
-  return errors;
+  return validateRealEstateForm(data);
 };
 
 const FormInput = ({ label, name, type = "text", placeholder, required = false, value, onChange, error }) => (
@@ -73,11 +65,13 @@ export default function RealEstate() {
     ownerName: "",
     ownerPhone: "",
     ownerEmail: "",
+    website: "", // Honeypot field
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -96,13 +90,52 @@ export default function RealEstate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormError("");
     trackEvent("realestate_form_submit_attempt", { property_type: formData.propertyType });
     
-    // Validar formulario
+    // ==================== SECURITY CHECKS ====================
+    
+    // 1. Check honeypot
+    if (isHoneypotFilled(formData.website)) {
+      trackEvent("spam_detected", { form: "realestate_honeypot" });
+      setSubmitted(true);
+      setTimeout(() => {
+        setFormData({
+          propertyType: "vivienda",
+          location: "",
+          area: "",
+          rooms: "",
+          bathrooms: "",
+          description: "",
+          ownerName: "",
+          ownerPhone: "",
+          ownerEmail: "",
+          website: "",
+        });
+        setSubmitted(false);
+      }, 3000);
+      return;
+    }
+
+    // 2. Check rate limiting
+    const rateLimitCheck = checkRateLimit();
+    if (!rateLimitCheck.allowed) {
+      setFormError(rateLimitCheck.message);
+      trackEvent("rate_limit_exceeded", { form: "realestate" });
+      return;
+    }
+
+    // 3. Validar formulario
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
+    }
+
+    // 4. Execute reCAPTCHA v3
+    const recaptchaToken = await executeRecaptcha('realestate_form_submit');
+    if (recaptchaToken) {
+      trackEvent("recaptcha_token_generated", { form: "realestate", token: recaptchaToken.substring(0, 20) + "..." });
     }
 
     setLoading(true);
@@ -113,23 +146,28 @@ export default function RealEstate() {
         // Modo demo
         console.log("Datos del formulario (modo demo):", formData);
         setSubmitted(true);
+        recordSubmission();
+        trackEvent("realestate_form_submit", { mode: "demo" });
       } else {
+        // Sanitizar datos
+        const sanitizedData = {
+          to_email: EMAIL,
+          property_type: PROPERTY_TYPES.find(t => t.value === formData.propertyType)?.label || formData.propertyType,
+          location: sanitizeInput(formData.location),
+          area: formData.area ? sanitizeInput(formData.area) : "No especificado",
+          rooms: formData.rooms ? sanitizeInput(formData.rooms) : "No especificado",
+          bathrooms: formData.bathrooms ? sanitizeInput(formData.bathrooms) : "No especificado",
+          description: formData.description ? sanitizeInput(formData.description) : "Sin descripción adicional",
+          owner_name: sanitizeInput(formData.ownerName),
+          owner_phone: sanitizeInput(formData.ownerPhone),
+          owner_email: sanitizeInput(formData.ownerEmail),
+        };
+
         // 1. Enviar correo a grupoadfincas con todos los detalles
         await emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
-          {
-            to_email: EMAIL,
-            property_type: PROPERTY_TYPES.find(t => t.value === formData.propertyType)?.label || formData.propertyType,
-            location: formData.location,
-            area: formData.area || "No especificado",
-            rooms: formData.rooms || "No especificado",
-            bathrooms: formData.bathrooms || "No especificado",
-            description: formData.description || "Sin descripción adicional",
-            owner_name: formData.ownerName,
-            owner_phone: formData.ownerPhone,
-            owner_email: formData.ownerEmail,
-          }
+          sanitizedData
         );
 
         // 2. Enviar correo de confirmación al usuario
@@ -138,19 +176,21 @@ export default function RealEstate() {
           EMAILJS_CONFIRMATION_TEMPLATE_ID,
           {
             to_email: formData.ownerEmail,
-            owner_name: formData.ownerName,
+            owner_name: sanitizeInput(formData.ownerName),
             property_type: PROPERTY_TYPES.find(t => t.value === formData.propertyType)?.label || formData.propertyType,
-            location: formData.location,
-            area: formData.area || "No especificado",
-            rooms: formData.rooms || "No especificado",
-            bathrooms: formData.bathrooms || "No especificado",
-            description: formData.description || "Sin descripción adicional",
-            owner_phone: formData.ownerPhone,
-            owner_email: formData.ownerEmail,
+            location: sanitizeInput(formData.location),
+            area: formData.area ? sanitizeInput(formData.area) : "No especificado",
+            rooms: formData.rooms ? sanitizeInput(formData.rooms) : "No especificado",
+            bathrooms: formData.bathrooms ? sanitizeInput(formData.bathrooms) : "No especificado",
+            description: formData.description ? sanitizeInput(formData.description) : "Sin descripción adicional",
+            owner_phone: sanitizeInput(formData.ownerPhone),
+            owner_email: sanitizeInput(formData.ownerEmail),
           }
         );
 
         setSubmitted(true);
+        recordSubmission();
+        trackEvent("realestate_form_submit", { mode: "production" });
       }
 
       // Resetear formulario después de 4 segundos
@@ -242,10 +282,10 @@ export default function RealEstate() {
           ) : (
             <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
               {/* Error general */}
-              {errors.submit && (
+              {(errors.submit || formError) && (
                 <div className="bg-red-600 bg-opacity-90 p-4 rounded-lg mb-6 flex items-center gap-3">
                   <FontAwesomeIcon icon={faExclamationCircle} className="text-xl flex-shrink-0" />
-                  <p className="text-sm">{errors.submit}</p>
+                  <p className="text-sm">{errors.submit || formError}</p>
                 </div>
               )}
 
@@ -311,7 +351,7 @@ export default function RealEstate() {
                   <FormInput
                     label="Ubicación"
                     name="location"
-                    placeholder="Ciudad, provincia..."
+                    placeholder="Dirección, ciudad, provincia..."
                     required
                     value={formData.location}
                     onChange={handleInputChange}

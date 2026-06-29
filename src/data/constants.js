@@ -22,6 +22,7 @@ export const MENU_ITEMS = [
   { label: "Quiénes Somos", href: "#quienes-somos" },
   { label: "Servicios", href: "#servicios" },
   { label: "Servicios Inmobiliarios", href: "#inmobiliaria" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
   { label: "Contacto", href: "#contacto" },
 ];
 
@@ -42,6 +43,7 @@ export const SECTIONS = {
   aboutUs: "quienes-somos",
   services: "servicios",
   realEstate: "inmobiliaria",
+  faq: "faq",
   contact: "contacto",
 };
 
