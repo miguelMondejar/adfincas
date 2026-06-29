@@ -11,7 +11,6 @@ import img4 from "../assets/jakub-zerdzicki-GQn9GnMkVQg-unsplash.jpg";
 export default function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-  const [preloadedImages, setPreloadedImages] = useState(new Set());
 
   const galleryItems = [
     {
@@ -54,14 +53,6 @@ export default function Gallery() {
 
     return () => clearInterval(timer);
   }, [autoPlay, galleryItems.length]);
-
-  // Preload adjacent images
-  useEffect(() => {
-    const nextIndex = (currentIndex + 1) % galleryItems.length;
-    const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-
-    setPreloadedImages(new Set([currentIndex, nextIndex, prevIndex]));
-  }, [currentIndex]);
 
   const goToPrevious = () => {
     setCurrentIndex(
@@ -115,7 +106,7 @@ export default function Gallery() {
                   alt={item.title}
                   title={item.description}
                   className="w-full h-full"
-                  priority={preloadedImages.has(index)}
+                  priority={true}
                   objectFit="cover"
                 />
 

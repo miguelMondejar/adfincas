@@ -1,11 +1,11 @@
 // Google Analytics Configuration
-export const GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; // Reemplazar con tu ID de Google Analytics
+export const GA_MEASUREMENT_ID = "G-XXXXXXXXXX"; // TODO
 
 // Google Search Console
-export const GOOGLE_SEARCH_CONSOLE_VERIFICATION = "XXXXX"; // Reemplazar con tu verification code
+export const GOOGLE_SEARCH_CONSOLE_VERIFICATION = "XXXXX"; // TODO
 
 // Bing Webmaster Tools
-export const BING_WEBMASTER_VERIFICATION = "XXXXX"; // Reemplazar con tu verification code
+export const BING_WEBMASTER_VERIFICATION = "XXXXX"; // TODO
 
 /**
  * Inicializar Google Analytics (cuando esté configurado)

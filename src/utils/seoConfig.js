@@ -52,8 +52,8 @@ export const ORGANIZATION_SCHEMA = {
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Calle Principal, 123",
-    "addressLocality": "Madrid",
-    "postalCode": "28001",
+    "addressLocality": "Sevilla",
+    "postalCode": "41001",
     "addressCountry": "ES",
   },
 };
