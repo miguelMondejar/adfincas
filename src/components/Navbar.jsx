@@ -18,10 +18,6 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      if (window.scrollY > 50 && menuOpen) {
-        setMenuOpen(false);
-      }
-
       let current = "";
       MENU_ITEMS.forEach((item) => {
         const section = document.querySelector(item.href);
@@ -38,7 +34,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     handleScroll(); 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [menuOpen]);
+  }, []);
 
   const handleMenuItemClick = (e, href) => {
     e.preventDefault(); 
@@ -89,9 +85,9 @@ export default function Navbar() {
             className={`flex items-center gap-3 font-bold text-2xl transition-all duration-300 hover:scale-105 ${
               scrolled ? "text-[--color-primary]" : "text-white"
             }`}
-            aria-label="ADFincas - Inicio"
+            aria-label="Grupo ADFincas - Inicio"
           >
-            <span className="hidden sm:inline tracking-tight">Grupo ADFincas</span>
+            <span className="tracking-tight">Grupo ADFincas</span>
           </a>
 
           {/* Desktop Menu */}

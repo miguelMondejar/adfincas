@@ -13,27 +13,30 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="h-[90vh] text-white text-center bg-gradient-to-r from-[--color-primary] to-[--color-secondary] relative overflow-hidden"
+      className="min-h-[90vh] text-white text-center bg-gradient-to-r from-[--color-primary] to-[--color-secondary] relative"
     >
-      {/* Gradient Background */}
-      <div className="absolute inset-0 opacity-30" style={{
-        backgroundImage: 'linear-gradient(135deg, rgba(84, 173, 148, 0.3) 0%, rgba(164, 124, 72, 0.3) 100%)',
-      }}></div>
+      {/* Decorative elements (overflow contained here) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 opacity-30" style={{
+          backgroundImage: 'linear-gradient(135deg, rgba(84, 173, 148, 0.3) 0%, rgba(164, 124, 72, 0.3) 100%)',
+        }}></div>
 
-      {/* Floating elements for visual interest */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-white opacity-5 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-40 h-40 bg-white opacity-5 rounded-full blur-3xl" />
+        {/* Floating elements for visual interest */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-white opacity-5 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-white opacity-5 rounded-full blur-3xl" />
+      </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
-        <div className="mb-8 shadow-lg bg-white rounded-full p-3 flex items-center justify-center h-48 w-48 md:h-56 md:w-56">
-          <img src={logo} alt="Grupo ADFincas Logo" className="h-40 md:h-48 w-40 md:w-48 object-contain" />
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[90vh] px-4 py-24">
+        <div className="mb-6 shadow-lg bg-white rounded-full p-3 flex items-center justify-center w-40 h-40 md:w-48 md:h-48 xl:w-56 xl:h-56 flex-shrink-0">
+          <img src={logo} alt="Grupo ADFincas Logo" className="w-32 h-32 md:w-40 md:h-40 xl:w-48 xl:h-48 object-contain" />
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight max-w-4xl">
+        <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-4 leading-tight max-w-4xl">
           {HERO_TITLE}
         </h1>
 
-        <p className="text-lg md:text-2xl mb-12 text-gray-100 max-w-2xl">
+        <p className="text-lg md:text-xl xl:text-2xl mb-8 text-gray-100 max-w-2xl">
           {HERO_SUBTITLE}
         </p>
 

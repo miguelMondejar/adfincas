@@ -4,7 +4,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faWhatsapp,
-  faFacebook,
   faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
@@ -53,20 +52,11 @@ export default function Footer() {
             <h3 className="text-[--color-secundary] font-bold text-lg mb-4">Síguenos</h3>
             <div className="flex gap-4 text-2xl">
               <a
-                href={SOCIAL_LINKS.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 transition"
-                aria-label="ADFincas en Facebook"
-              >
-                <FontAwesomeIcon icon={faFacebook} />
-              </a>
-              <a
                 href={SOCIAL_LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-pink-500 hover:text-pink-700 transition"
-                aria-label="ADFincas en Instagram"
+                aria-label="Grupo ADFincas en Instagram"
               >
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
@@ -75,7 +65,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-700 hover:text-blue-900 transition"
-                aria-label="ADFincas en LinkedIn"
+                aria-label="Grupo ADFincas en LinkedIn"
               >
                 <FontAwesomeIcon icon={faLinkedin} />
               </a>
@@ -86,7 +76,7 @@ export default function Footer() {
         {/* Legal Info */}
         <div className="border-t border-gray-700 pt-6">
           <div className="mb-6 text-sm">
-            <div className="flex flex-wrap gap-6 justify-center md:justify-start">
+            <div className="flex flex-wrap gap-6 justify-center">
               <a
                 href="/legal#terminos"
                 className="text-[--color-secundary] hover:text-[--color-white] transition font-semibold"

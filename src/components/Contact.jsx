@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhoneAlt, faPaperPlane, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { faWhatsapp, faFacebook, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faWhatsapp, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { PHONE_LINK, PHONE_FORMATTED, WHATSAPP_URL, SOCIAL_LINKS, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, EMAILJS_CONFIRMATION_TEMPLATE_ID, EMAIL } from "../data/constants";
 import { validateContactForm, checkRateLimit, recordSubmission, isHoneypotFilled, sanitizeInput, executeRecaptcha } from "../utils/formSecurityConfig";
 import HoneypotField from "./HoneypotField";
@@ -161,7 +161,7 @@ export default function Contact() {
               <a
                 href={PHONE_LINK}
                 className="flex items-center gap-4 text-[--color-primary] text-lg font-semibold hover:text-[--color-secondary] transition"
-                aria-label={`Llamar a ADFincas al ${PHONE_FORMATTED}`}
+                aria-label={`Llamar a Grupo ADFincas al ${PHONE_FORMATTED}`}
               >
                 <div className="w-12 h-12 bg-[--color-primary] rounded-full flex items-center justify-center text-white">
                   <FontAwesomeIcon icon={faPhoneAlt} />
@@ -201,20 +201,11 @@ export default function Contact() {
               <h4 className="text-lg font-bold text-[#1A1A1A] mb-4 text-left">Síguenos</h4>
               <div className="flex gap-6 text-3xl">
                 <a
-                  href={SOCIAL_LINKS.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 transition"
-                  aria-label="ADFincas en Facebook"
-                >
-                  <FontAwesomeIcon icon={faFacebook} />
-                </a>
-                <a
                   href={SOCIAL_LINKS.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-pink-500 hover:text-pink-700 transition"
-                  aria-label="ADFincas en Instagram"
+                  aria-label="Grupo ADFincas en Instagram"
                 >
                   <FontAwesomeIcon icon={faInstagram} />
                 </a>
@@ -223,7 +214,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-700 hover:text-blue-900 transition"
-                  aria-label="ADFincas en LinkedIn"
+                  aria-label="Grupo ADFincas en LinkedIn"
                 >
                   <FontAwesomeIcon icon={faLinkedin} />
                 </a>

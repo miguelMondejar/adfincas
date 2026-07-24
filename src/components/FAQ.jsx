@@ -40,7 +40,7 @@ export default function FAQ() {
         "name": "¿Qué zonas de España cubre Grupo ADFincas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Actuamos principalmente en Sevilla, Málaga y alrededores, aunque contamos con redes de colaboradores en otras regiones para servicios especializados."
+          "text": "Trabajamos principalmente en Sevilla y Málaga. En Sevilla cubrimos todos los barrios y distritos: Nervión, San Pablo, Sevilla Este, Triana, Los Remedios, Heliópolis, Macarena, Bellavista, Pino Montano, Torreblanca y más. También atendemos municipios del Aljarafe y alrededores como Tomares, Camas, Mairena del Aljarafe, Bormujos, Dos Hermanas y Alcalá de Guadaíra. En Málaga capital y municipios de la Costa del Sol. Contacta con nosotros para confirmar cobertura en tu zona."
         }
       },
       {
@@ -92,7 +92,7 @@ export default function FAQ() {
     {
       id: 5,
       question: "¿Qué zonas de España cubre Grupo ADFincas?",
-      answer: "Actuamos principalmente en Sevilla, Málaga y alrededores, aunque contamos con redes de colaboradores en otras regiones para servicios especializados.",
+      answer: "Trabajamos en Sevilla y Málaga. En Sevilla atendemos todos los barrios: Nervión, San Pablo, Sevilla Este, Triana, Los Remedios, Heliópolis, Macarena, Bellavista, Pino Montano y más. También cubrimos el Aljarafe y municipios como Tomares, Camas, Mairena del Aljarafe, Dos Hermanas y Alcalá de Guadaíra. En Málaga capital y la Costa del Sol. Contáctanos para confirmar cobertura en tu zona.",
       category: "cobertura"
     },
     {

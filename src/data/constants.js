@@ -11,7 +11,6 @@ export const COMPANY_FULL_NAME = "Grupo ADFincas - Administración de Fincas & S
 
 // Social Links
 export const SOCIAL_LINKS = {
-  facebook: "https://www.facebook.com/ADFincas",
   instagram: "https://www.instagram.com/alfonso.administradordefincas",
   linkedin: "https://www.linkedin.com/company/ADFincas",
   email: EMAIL,
@@ -28,7 +27,7 @@ export const MENU_ITEMS = [
 
 // Hero Section
 export const HERO_TITLE = "Administración de Fincas Profesional";
-export const HERO_SUBTITLE = "Confianza, experiencia y dedicación en tus propiedades";
+export const HERO_SUBTITLE = "Confianza, experiencia y dedicación en tus propiedades.";
 export const HERO_CTA = "Solicitar Presupuesto";
 
 // EmailJS Configuration

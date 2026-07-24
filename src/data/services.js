@@ -21,7 +21,6 @@ export const SERVICES_DATA = [
     title: "Mantenimiento Técnico",
     desc: "Conservación y reparación integral de instalaciones.",
     details: [
-      "Inspecciones periódicas de estructuras.",
       "Gestión de averías y mantenimiento preventivo.",
       "Coordinación con técnicos especializados.",
       "Control de calidad en trabajos de reparación."

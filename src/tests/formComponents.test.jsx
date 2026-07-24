@@ -18,7 +18,7 @@ jest.mock('@fortawesome/free-solid-svg-icons', () => ({
   faArrowRight: 'faArrowRight',
 }));
 jest.mock('@fortawesome/free-brands-svg-icons', () => ({
-  faWhatsapp: 'faWhatsapp', faFacebook: 'faFacebook',
+  faWhatsapp: 'faWhatsapp',
   faInstagram: 'faInstagram', faLinkedin: 'faLinkedin',
 }));
 jest.mock('@emailjs/browser', () => ({

@@ -73,16 +73,12 @@ describe('Constantes de empresa', () => {
 // Redes sociales
 // ============================================================
 describe('SOCIAL_LINKS', () => {
-  test('tiene los 4 enlaces requeridos', () => {
-    expect(SOCIAL_LINKS).toHaveProperty('facebook');
+  test('tiene los 3 enlaces requeridos', () => {
     expect(SOCIAL_LINKS).toHaveProperty('instagram');
     expect(SOCIAL_LINKS).toHaveProperty('linkedin');
     expect(SOCIAL_LINKS).toHaveProperty('email');
   });
 
-  test('facebook es URL válida', () => {
-    expect(SOCIAL_LINKS.facebook).toMatch(/^https:\/\/www\.facebook\.com\//);
-  });
 
   test('instagram es URL válida', () => {
     expect(SOCIAL_LINKS.instagram).toMatch(/^https:\/\/www\.instagram\.com\//);

@@ -24,7 +24,7 @@ export default function AboutUs() {
           </h2>
           <div className="w-24 h-1 bg-[--color-secondary] mx-auto mb-6 rounded-full"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            En ADFincas, somos especialistas en administración de fincas y servicios inmobiliarios con más de una década de experiencia
+            En Grupo ADFincas, somos especialistas en administración de fincas y servicios inmobiliarios con más de una década de experiencia
           </p>
         </div>
 

@@ -128,7 +128,7 @@ describe('SEO', () => {
 
   test('renderiza sin errores con props básicas', () => {
     expect(() =>
-      render(<SEO title="ADFincas - Test" description="Descripción de prueba" />)
+      render(<SEO title="Grupo ADFincas - Test" description="Descripción de prueba" />)
     ).not.toThrow();
   });
 
