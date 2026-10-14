@@ -16,9 +16,25 @@ import SEO from "./components/SEO";
 import { SEO_DATA, ORGANIZATION_SCHEMA, LOCAL_BUSINESS_SCHEMA, SERVICES_SCHEMA } from "./utils/seoConfig";
 import { COLORS } from "./utils/colorConfig";
 import { loadRecaptchaScript } from "./utils/formSecurityConfig";
+import { initializeGoogleAnalytics } from "./utils/analyticsConfig";
+import ComingSoon from "./components/ComingSoon";
 
 function App() {
+  const hostname = window.location.hostname.toLowerCase();
+
+  if (hostname === "grupoadfincas.es" || hostname === "www.grupoadfincas.es") {
+    return <ComingSoon />;
+  }
+
+  return <MainSite />;
+}
+
+function MainSite() {
   const [currentPage, setCurrentPage] = useState("home");
+
+  useEffect(() => {
+    initializeGoogleAnalytics();
+  }, []);
 
   // Inject CSS variables from colorConfig for dynamic color changes
   useEffect(() => {
